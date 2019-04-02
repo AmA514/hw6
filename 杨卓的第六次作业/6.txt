@@ -1,0 +1,347 @@
+{\rtf1\ansi\ansicpg936\cocoartf1671\cocoasubrtf200
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red160\green32\blue240;\red0\green0\blue255;}
+{\*\expandedcolortbl;;\csgenericrgb\c62745\c12549\c94118;\csgenericrgb\c0\c0\c100000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 %6.1\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs20 \cf0 A = inputdlg(\cf2 'Mean '\cf0 );
+\fs24 \
+
+\fs20 B = str2num(cell2mat(A));
+\fs24 \
+
+\fs20 C = inputdlg(\cf2 'Variance'\cf0 );
+\fs24 \
+
+\fs20 D = str2num(cell2mat(C));
+\fs24 \
+
+\fs20 i1=imread(\cf2 'lena.bmp'\cf0 );
+\fs24 \
+
+\fs20 i2=imnoise(i1,\cf2 'gaussian'\cf0 ,B,D);
+\fs24 \
+
+\fs20 figure(1)
+\fs24 \
+
+\fs20 subplot(221),imshow (i2),title(\cf2 'lena noise'\cf0 );
+\fs24 \
+
+\fs20 imwrite(i2,\cf2 'lena_noise.bmp'\cf0 );\
+____\
+i0=imread(\cf2 'lena.bmp'\cf0 );
+\fs24 \
+
+\fs20 i1=imread(\cf2 'lena_noise.bmp'\cf0 );
+\fs24 \
+
+\fs20 n=5;
+\fs24 \
+
+\fs20 h=1/n^2.*ones(n,n);
+\fs24 \
+
+\fs20 i2=conv2(i1,h,\cf2 'same'\cf0 );
+\fs24 \
+
+\fs20 i2=uint8(i2);
+\fs24 \
+
+\fs20 a=ones(n,n);
+\fs24 \
+
+\fs20 p=size(i1);
+\fs24 \
+
+\fs20 x1=double(i1);
+\fs24 \
+
+\fs20 x2=x1;
+\fs24 \
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf3 for\cf0  i=1:p(1)-n+1
+\fs24 \
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf0     \cf3 for\cf0  j=1:p(2)-n+1
+\fs24 \
+
+\fs20         c=x1(i:i+(n-1),j:j+(n-1));
+\fs24 \
+
+\fs20         e=c(1,:);
+\fs24 \
+
+\fs20         \cf3 for\cf0  u=2:n
+\fs24 \
+
+\fs20             e=[e,c(u,:)];
+\fs24 \
+
+\fs20         \cf3 end
+\fs24 \cf0 \
+
+\fs20         gg=median(e);
+\fs24 \
+
+\fs20         x2(i+(n-1)/2,j+(n-1)/2)=gg;
+\fs24 \
+
+\fs20     \cf3 end
+\fs24 \cf0 \
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf3 end
+\fs24 \cf0 \
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf0 i3=uint8(x2);
+\fs24 \
+
+\fs20 figure(1);
+\fs24 \
+
+\fs20 subplot(221),imshow (i0),title(\cf2 'lena'\cf0 );
+\fs24 \
+
+\fs20 subplot(222),imshow (i1),title(\cf2 'lena noise'\cf0 );
+\fs24 \
+
+\fs20 subplot(223),imshow (i2),title(\cf2 'lena arithmetic mean'\cf0 );
+\fs24 \
+
+\fs20 subplot(224),imshow (i3),title(\cf2 'lena median'\cf0 );\
+\
+%6.2\
+A = inputdlg(\cf2 'salt-and-pepper noise'\cf0 );
+\fs24 \
+
+\fs20 B = str2num(cell2mat(A));
+\fs24 \
+
+\fs20 i1=imread(\cf2 'lena.bmp'\cf0 );
+\fs24 \
+
+\fs20 i2=imnoise(i1,\cf2 'salt & pepper'\cf0 ,B);
+\fs24 \
+
+\fs20 figure(1)
+\fs24 \
+
+\fs20 subplot(221),imshow (i2),title(\cf2 'lena noise'\cf0 );
+\fs24 \
+
+\fs20 imwrite(i2,\cf2 'lena_noise1.bmp'\cf0 );\
+____
+\fs24 \
+
+\fs20 i0=imread(\cf2 'lena.bmp'\cf0 );
+\fs24 \
+
+\fs20 i1=imread(\cf2 'lena_noise1.bmp'\cf0 );
+\fs24 \
+
+\fs20 n=5;
+\fs24 \
+
+\fs20 h=1/n^2.*ones(n,n);
+\fs24 \
+
+\fs20 i2=conv2(i1,h,\cf2 'same'\cf0 );
+\fs24 \
+
+\fs20 i2=uint8(i2);
+\fs24 \
+
+\fs20 a=ones(n,n);
+\fs24 \
+
+\fs20 p=size(i1);
+\fs24 \
+
+\fs20 x1=double(i1);
+\fs24 \
+
+\fs20 x2=x1;
+\fs24 \
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf3 for\cf0  i=1:p(1)-n+1
+\fs24 \
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf0     \cf3 for\cf0  j=1:p(2)-n+1
+\fs24 \
+
+\fs20         c=x1(i:i+(n-1),j:j+(n-1));
+\fs24 \
+
+\fs20         e=c(1,:);
+\fs24 \
+
+\fs20         \cf3 for\cf0  u=2:n
+\fs24 \
+
+\fs20             e=[e,c(u,:)];
+\fs24 \
+
+\fs20         \cf3 end
+\fs24 \cf0 \
+
+\fs20         gg=median(e);
+\fs24 \
+
+\fs20         x2(i+(n-1)/2,j+(n-1)/2)=gg;
+\fs24 \
+
+\fs20     \cf3 end
+\fs24 \cf0 \
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf3 end
+\fs24 \cf0 \
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf0 i3=uint8(x2);
+\fs24 \
+
+\fs20 figure(1);
+\fs24 \
+
+\fs20 subplot(221),imshow (i0),title(\cf2 'lena'\cf0 );
+\fs24 \
+
+\fs20 subplot(222),imshow (i1),title(\cf2 'lena noise'\cf0 );
+\fs24 \
+
+\fs20 subplot(223),imshow (i2),title(\cf2 'lena arithmetic mean'\cf0 );
+\fs24 \
+
+\fs20 subplot(224),imshow (i3),title(\cf2 'lena median'\cf0 );
+\fs24 \
+\
+%6.3\
+
+\fs20 A = inputdlg(\cf2 'Mean '\cf0 );
+\fs24 \
+
+\fs20 Z = str2num(cell2mat(A));
+\fs24 \
+
+\fs20 C = inputdlg(\cf2 'Variance'\cf0 );
+\fs24 \
+
+\fs20 D = str2num(cell2mat(C));
+\fs24 \
+
+\fs20 i1=imread(\cf2 'lena.bmp'\cf0 );
+\fs24 \
+
+\fs20 f=double(i1);
+\fs24 \
+
+\fs20 F=fft2(f);
+\fs24 \
+
+\fs20 F=fftshift(F);
+\fs24 \
+
+\fs20 [M,N]=size(F);
+\fs24 \
+
+\fs20 a=0.1;b=0.1;T=1;
+\fs24 \
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf3 for\cf0  u=1:M
+\fs24 \
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf0     \cf3 for\cf0  v=1:N
+\fs24 \
+
+\fs20         H(u,v)=(T/(pi*(u*a+v*b)))*sin(pi*(u*a+v*b))*exp(-sqrt(-1)*pi*(u*a+v*b));
+\fs24 \
+
+\fs20         G(u,v)=H(u,v)*F(u,v);
+\fs24 \
+
+\fs20     \cf3 end
+\fs24 \cf0 \
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf3 end
+\fs24 \cf0 \
+\pard\pardeftab720\partightenfactor0
+
+\fs20 \cf0 B=ifftshift(G);
+\fs24 \
+
+\fs20 B=ifft2(G);
+\fs24 \
+
+\fs20 B=156.*B./max(max(B));
+\fs24 \
+
+\fs20 B=uint8(real(B));
+\fs24 \
+
+\fs20 imwrite(B,\cf2 'lena_noise2.bmp'\cf0 )
+\fs24 \
+
+\fs20 i2=imnoise(B,\cf2 'gaussian'\cf0 ,Z,D);
+\fs24 \
+
+\fs20 figure(1)
+\fs24 \
+
+\fs20 subplot(221),imshow (i1),title(\cf2 'lena'\cf0 );
+\fs24 \
+
+\fs20 subplot(222),imshow (B),title(\cf2 'lena noise1'\cf0 );
+\fs24 \
+
+\fs20 subplot(223),imshow (i2),title(\cf2 'lena noise2'\cf0 );
+\fs24 \
+
+\fs20 imwrite(i2,\cf2 'lena_noise3.bmp'\cf0 );\
+___\
+i1=imread(\cf2 'lena.bmp'\cf0 );
+\fs24 \
+
+\fs20 PSF=fspecial(\cf2 'motion'\cf0 ,20,45);
+\fs24 \
+
+\fs20 i2=imfilter(i1,PSF,\cf2 'circular'\cf0 ,\cf2 'conv'\cf0 );
+\fs24 \
+
+\fs20 i3=imnoise(i2,\cf2 'gaussian'\cf0 ,0,0.01);
+\fs24 \
+
+\fs20 noise=imnoise(zeros(size(i3)),\cf2 'gaussian'\cf0 ,0,0.01);
+\fs24 \
+
+\fs20 NSR=sum(noise(:).^2)/sum(im2double(i1(:)).^2);
+\fs24 \
+
+\fs20 i4=deconvwnr(i3,PSF,NSR);
+\fs24 \
+
+\fs20 i5=deconvreg(i2,PSF);
+\fs24 \
+
+\fs20 figure(1)
+\fs24 \
+
+\fs20 subplot(221),imshow (i4),title(\cf2 'lena wiener'\cf0 );
+\fs24 \
+
+\fs20 subplot(222),imshow (i5),title(\cf2 'lena Constrained least squares method'\cf0 );
+\fs24 \
+}
